@@ -9,6 +9,17 @@ router.get("/", (req, res) => {
   res.render("articles", { artTitle });
 });
 
+router.post("/", (req, res) => {
+  let newArt = req.body;
+  DS_Articles.createArticle(
+    newArt.title,
+    newArt.body,
+    newArt.author,
+    newArt.urlTitle
+  );
+  res.send("hi");
+});
+
 router.get("/:title", (req, res) => {
   const articleName = req.params.title.replace(/%20/g, "");
   //   console.log("articleName", articleName);

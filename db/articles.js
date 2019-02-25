@@ -9,14 +9,14 @@ class DS_Articles {
       title: "The King is Here",
       body: "Lebron James Dunks on YOU!",
       author: "JR Smith",
-      urlTitle: "lebron"
+      urlTitle: "The%20King%20is%20Here"
     });
     this.idNum++;
     this.storage.push({
       title: "Rock Out the Right Way",
       body: "Feel It",
       author: "Jimmy Page",
-      urlTitle: "rock"
+      urlTitle: "Rock%20Out%20the%20Right%20Way"
     });
     this.idNum++;
   }
@@ -34,6 +34,15 @@ class DS_Articles {
     });
     console.log("result", result);
     return result;
+  }
+  createArticle(title, body, author, urlTitle) {
+    this.storage.push({
+      title,
+      body,
+      author,
+      urlTitle
+    });
+    this.idNum++;
   }
 }
 
