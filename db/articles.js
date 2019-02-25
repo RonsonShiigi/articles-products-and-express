@@ -44,6 +44,13 @@ class DS_Articles {
     });
     this.idNum++;
   }
+  deleteArticle(title) {
+    this.storage.slice().forEach((art, idx) => {
+      if (art.title === title) {
+        this.storage.splice(idx, 1);
+      }
+    });
+  }
 }
 
 module.exports = new DS_Articles();

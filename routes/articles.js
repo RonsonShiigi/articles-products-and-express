@@ -17,7 +17,14 @@ router.post("/", (req, res) => {
     newArt.author,
     newArt.urlTitle
   );
-  res.send("hi");
+  res.send("good job");
+});
+
+router.delete("/", (req, res) => {
+  let title = req.body.title;
+  DS_Articles.deleteArticle(title);
+  console.log(title);
+  res.send("yay you deleted it");
 });
 
 router.get("/:title", (req, res) => {
