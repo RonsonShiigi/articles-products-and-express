@@ -36,14 +36,22 @@ router.get("/:title", (req, res) => {
   //   console.log("articleName", articleName);
 
   const article = DS_Articles.getArticleByTitle(articleName);
-  console.log("article", article);
+  //   console.log("article", article);
   res.render("articlesSpec", article);
 });
 
 //allows client to edit current articles
 router.put("/:title", (req, res) => {
-  let articleName = req.params.title;
-  console.log(articleName);
+  let title = req.params.title;
+  let body = req.body.body;
+  let author = req.body.author;
+  let urlTitle = req.body.urlTitle;
+  DS_Articles.editArticle(title, body, author, urlTitle);
+  // console.log(title);
+  // console.log("body", body);
+  // console.log("author", author);
+  // console.log("urlTitle", urlTitle);
+  res.send("edited " + title);
 });
 
 module.exports = router;

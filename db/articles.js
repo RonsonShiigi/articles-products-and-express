@@ -21,12 +21,12 @@ class DS_Articles {
     this.idNum++;
   }
   getAllArticles() {
-    console.log(this.storage);
+    // console.log(this.storage);
     return this.storage.slice();
   }
   getArticleByTitle(title) {
     let result;
-    console.log("title", title);
+    // console.log("title", title);
     this.storage.forEach(article => {
       if (article.title === title) {
         result = article;
@@ -43,6 +43,18 @@ class DS_Articles {
       urlTitle
     });
     this.idNum++;
+  }
+  editArticle(title, body, author, urlTitle) {
+    this.storage.forEach(article => {
+      if (article.title === title) {
+        article.title = title;
+        article.body = body;
+        article.author = author;
+        article.urlTitle = urlTitle;
+      } else {
+        console.log("boohoo");
+      }
+    });
   }
   deleteArticle(title) {
     this.storage.slice().forEach((art, idx) => {
