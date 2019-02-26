@@ -10,6 +10,10 @@ router.get("/", (req, res) => {
   res.render("articles", { artTitle });
 });
 
+//renders a page for creating a new article
+router.get("/new", (req, res) => {
+  res.render("newArticle");
+});
 //allows clients to post new articles
 router.post("/", (req, res) => {
   let newArt = req.body;
@@ -47,7 +51,8 @@ router.put("/:title", (req, res) => {
   let author = req.body.author;
   let urlTitle = req.body.urlTitle;
   let edit = DS_Articles.editArticle(title, body, author, urlTitle);
-  console.log("success", DS_Articles.success);
+
+  console.log("success is", DS_Articles.success);
   if (DS_Articles.success === true) {
     res.send("You have edited " + title);
   } else if (DS_Articles.success === false) {
