@@ -28,14 +28,6 @@ router.post("/", (req, res) => {
   res.send("good job creating a new article");
 });
 
-//allows clients to delete articles
-router.delete("/", (req, res) => {
-  let title = req.body.title;
-  DS_Articles.deleteArticle(title);
-  console.log(title);
-  res.send("yay you deleted " + title);
-});
-
 //loads specific articles
 router.get("/:title", (req, res) => {
   const articleName = req.params.title.replace(/%20/g, "");
@@ -62,6 +54,28 @@ router.post("/edit", (req, res) => {
   const urlTitle = req.body.urlTitle;
   DS_Articles.editArticle(title, newTitle, body, author, urlTitle);
   res.redirect("/articles/" + urlTitle);
+});
+
+//renders the delete confimation page
+router.get("/:title/delete", (req, res) => {
+  const articleName = req.params.title;
+  const article = DS_Articles.getArticleByTitle(articleName);
+  res.render("deleteArticles", article);
+});
+
+//allows clients to delete posts via browser
+router.post("/:title/delete", (req, res) => {
+  const articleName = req.params.title;
+  DS_Articles.deleteArticle(articleName);
+  res.redirect("/articles");
+});
+
+//allows clients to delete articles
+router.delete("/", (req, res) => {
+  let title = req.body.title;
+  DS_Articles.deleteArticle(title);
+  console.log(title);
+  res.send("yay you deleted " + title);
 });
 
 //allows client to edit current articles via postman
