@@ -1,3 +1,7 @@
 <h1>{{title}}</h1>
 <h2>By {{author}}</h2>
 <p>{{body}}</p>
+
+<form action="/articles/{{title}}/edit" method="GET">
+    <button type="submit">Edit Article</button>
+</form>

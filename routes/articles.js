@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
 router.get("/new", (req, res) => {
   res.render("newArticle");
 });
+
 //allows clients to post new articles
 router.post("/", (req, res) => {
   let newArt = req.body;
@@ -45,13 +46,19 @@ router.get("/:title", (req, res) => {
   res.render("articlesSpec", article);
 });
 
-//allows client to edit current articles
+//renders edit articles page
+router.get("/:title/edit", (req, res) => {
+  res.render("editArticle");
+});
+
+//allows client to edit current articles via postman
 router.put("/:title", (req, res) => {
   let title = req.params.title;
+  let newTitle = req.params.title;
   let body = req.body.body;
   let author = req.body.author;
   let urlTitle = req.body.urlTitle;
-  let edit = DS_Articles.editArticle(title, body, author, urlTitle);
+  let edit = DS_Articles.editArticle(title, newTitle, body, author, urlTitle);
 
   console.log("success is", DS_Articles.success);
   if (DS_Articles.success === true) {

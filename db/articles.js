@@ -45,11 +45,11 @@ class DS_Articles {
     });
     this.idNum++;
   }
-  editArticle(title, body, author, urlTitle) {
+  editArticle(title, newTitle, body, author, urlTitle) {
     this.success = false;
     this.storage.forEach(article => {
       if (article.title === title) {
-        article.title = title;
+        article.title = newTitle;
         article.body = body;
         article.author = author;
         article.urlTitle = urlTitle;
