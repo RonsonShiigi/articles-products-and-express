@@ -48,7 +48,20 @@ router.get("/:title", (req, res) => {
 
 //renders edit articles page
 router.get("/:title/edit", (req, res) => {
-  res.render("editArticle");
+  const articleName = req.params.title;
+  const article = DS_Articles.getArticleByTitle(articleName);
+  res.render("editArticle", article);
+});
+
+//alows client to edit article via browser
+router.post("/edit", (req, res) => {
+  const title = req.body.title;
+  const newTitle = req.body.newTitle;
+  const body = req.body.body;
+  const author = req.body.author;
+  const urlTitle = req.body.urlTitle;
+  DS_Articles.editArticle(title, newTitle, body, author, urlTitle);
+  res.redirect("/articles/" + urlTitle);
 });
 
 //allows client to edit current articles via postman
