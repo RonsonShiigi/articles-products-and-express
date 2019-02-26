@@ -3,6 +3,7 @@ class DS_Articles {
     this.storage = [];
     this.idNum = 1;
     this.preArticles();
+    this.success = false;
   }
   preArticles() {
     this.storage.push({
@@ -45,14 +46,17 @@ class DS_Articles {
     this.idNum++;
   }
   editArticle(title, body, author, urlTitle) {
+    this.success = false;
     this.storage.forEach(article => {
       if (article.title === title) {
         article.title = title;
         article.body = body;
         article.author = author;
         article.urlTitle = urlTitle;
+        this.success = true;
+        return this.success;
       } else {
-        console.log("boohoo");
+        return this.success;
       }
     });
   }

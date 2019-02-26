@@ -27,7 +27,7 @@ router.delete("/", (req, res) => {
   let title = req.body.title;
   DS_Articles.deleteArticle(title);
   console.log(title);
-  res.send("yay you deleted it");
+  res.send("yay you deleted " + title);
 });
 
 //loads specific articles
@@ -46,12 +46,13 @@ router.put("/:title", (req, res) => {
   let body = req.body.body;
   let author = req.body.author;
   let urlTitle = req.body.urlTitle;
-  DS_Articles.editArticle(title, body, author, urlTitle);
-  // console.log(title);
-  // console.log("body", body);
-  // console.log("author", author);
-  // console.log("urlTitle", urlTitle);
-  res.send("edited " + title);
+  let edit = DS_Articles.editArticle(title, body, author, urlTitle);
+  console.log("success", DS_Articles.success);
+  if (DS_Articles.success === true) {
+    res.send("You have edited " + title);
+  } else if (DS_Articles.success === false) {
+    res.send("fuck off");
+  }
 });
 
 module.exports = router;
