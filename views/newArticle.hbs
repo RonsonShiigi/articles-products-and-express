@@ -1,8 +1,29 @@
-<form action="/:title" method="POST">
+<form action="/articles" method="POST">
     <div>
         <label for="title">
-            Name of Article
+            Title of Article
         </label>
-        <input type="text">
+        <input type="text" name="title" id="title">
+    </div>
+    <div>
+        <label for="body">
+            Body Content
+        </label>
+        <input type="text" name="body" id="body">
+    </div>
+    <div>
+        <label for="author">
+            Author of Article
+        </label>
+        <input type="text" name="author" id="author">
+    </div>
+    <div>
+        <label for="urlTitle">
+            urlTitle
+        </label>
+        <input type="text" name="urlTitle" id="urlTitle">
+    </div>
+    <div>
+        <button>Post New Article</button>
     </div>
 </form>
