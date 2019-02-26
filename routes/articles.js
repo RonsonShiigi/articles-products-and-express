@@ -23,7 +23,8 @@ router.post("/", (req, res) => {
     newArt.author,
     newArt.urlTitle
   );
-  res.send("good job");
+  res.redirect("/articles");
+  res.send("good job creating a new article");
 });
 
 //allows clients to delete articles
