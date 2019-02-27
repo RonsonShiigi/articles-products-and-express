@@ -9,6 +9,11 @@ router.get("/", (req, res) => {
   res.render("products", { allProducts });
 });
 
+//renders a page to create new products
+router.get("/new", (req, res) => {
+  res.render("newProduct");
+});
+
 //loads specific products via id number
 router.get("/:id", (req, res) => {
   let id = Number(req.params.id);
@@ -27,6 +32,7 @@ router.post("/", (req, res) => {
     newProduct.price,
     newProduct.inventory
   );
+  res.redirect("/products");
   res.send("you have created a new product");
 });
 module.exports = router;
