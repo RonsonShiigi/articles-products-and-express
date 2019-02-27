@@ -1,1 +1,11 @@
-<h1>Proucts Page</h1>
+<h1>Buy Our Products</h1>
+<ul>
+    {{#each allProducts}}
+    <li>
+        <a href="/products/{{id}}">{{name}}</a>
+    </li>
+    {{/each}}
+</ul>
+<form action="/products/new" method="GET">
+    <button type="submit">Add a New Product</button>
+</form>

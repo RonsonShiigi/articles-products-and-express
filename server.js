@@ -4,6 +4,7 @@ let app = express();
 const PORT = 8080;
 const bp = require("body-parser");
 const articles = require("./routes/articles");
+const products = require("./routes/products");
 
 // const products = require("./routes/products");
 
@@ -18,6 +19,11 @@ app.engine(
 );
 app.set("view engine", "hbs");
 app.use("/articles", articles);
+app.use("/products", products);
+
+app.get("/", (req, res) => {
+  res.render("homePage");
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port:${PORT}`);
