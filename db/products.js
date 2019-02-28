@@ -31,9 +31,11 @@ class DS_Products {
     this.storage.forEach(product => {
       if (product.id === id) {
         result = product;
+        console.log("result", result);
+        return result;
       }
     });
-    console.log("result", result);
+
     return result;
   }
 

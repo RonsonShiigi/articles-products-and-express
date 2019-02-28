@@ -1,0 +1,39 @@
+body {
+  background-color: cornflowerblue;
+}
+
+/* Home page stuff */
+#intro {
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+#path {
+  font-size: 40px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+#introButtons {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}
+
+.inButton {
+  font-size: 30px;
+  border-radius: 5px;
+}
+
+#dojoImg {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+/* Edit product page stuff */
+#editHead {
+  background-color: cornflowerblue;
+}

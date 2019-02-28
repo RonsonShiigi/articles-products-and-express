@@ -9,6 +9,7 @@ const products = require("./routes/products");
 // const products = require("./routes/products");
 
 //middleware
+app.use(express.static(__dirname + "/public"));
 app.use(bp.urlencoded({ extended: true }));
 app.engine(
   "hbs",

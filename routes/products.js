@@ -18,16 +18,8 @@ router.get("/new", (req, res) => {
 router.get("/:id/edit", (req, res) => {
   const productId = Number(req.params.id);
   const product = DS_Products.getProductById(productId);
+  console.log("edit");
   res.render("editProduct", product);
-});
-
-//loads specific products via id number
-router.get("/:id", (req, res) => {
-  let id = Number(req.params.id);
-
-  const product = DS_Products.getProductById(id);
-  console.log(product);
-  res.render("productSpecs", product);
 });
 
 //renders delete confirmation page
@@ -36,6 +28,15 @@ router.get("/:id/delete", (req, res) => {
   const product = DS_Products.getProductById(productId);
   console.log("delete", product);
   res.render("deleteProducts", product);
+});
+
+//loads specific products via id number
+router.get("/:id", (req, res) => {
+  let id = Number(req.params.id);
+  console.log("id", id);
+  const product = DS_Products.getProductById(id);
+  console.log("hi", req.params.id);
+  res.render("productSpecs", product);
 });
 
 //allows clients to create new products
