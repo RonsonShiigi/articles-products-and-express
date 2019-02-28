@@ -2,6 +2,10 @@
 <h2>{{price}}</h2>
 <p>stock left: {{inventory}}</p>
 
+<form action="/products/{{id}}/edit" method="GET">
+    <button type="submit">Edit Product</button>
+</form>
+
 <form action="/products" method="GET">
     <button type="submit">Go back to Products</button>
 </form>

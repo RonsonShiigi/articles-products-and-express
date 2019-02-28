@@ -1,0 +1,20 @@
+<h1>Are you sure you want to delete</h1>
+<div>
+    <h2>
+        {{name}}
+    </h2>
+</div>
+<div>
+    <form action="/products/{{id}}/delete" method="POST">
+        <div>
+            <button type="subimt">Yes, Delete {{name}}</button>
+        </div>
+    </form>
+</div>
+<div>
+    <form action="/products/{{id}}/edit">
+        <div>
+            <button type="submit">Go back to Edit Page</button>
+        </div>
+    </form>
+</div>

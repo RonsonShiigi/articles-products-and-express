@@ -44,8 +44,31 @@ class DS_Products {
       price,
       inventory
     });
-
     this.idNum++;
+  }
+
+  editProduct(id, name, price, inventory) {
+    this.success = false;
+    this.storage.forEach(product => {
+      if (product.id === id) {
+        product.name = name;
+        product.price = price;
+        product.inventory = inventory;
+        this.success = true;
+        return this.success;
+      } else {
+        return this.success;
+      }
+    });
+  }
+
+  deleteProduct(id) {
+    this.storage.slice().forEach((product, idx) => {
+      if (product.id === id) {
+        console.log(product);
+        this.storage.splice(idx, 1);
+      }
+    });
   }
 }
 

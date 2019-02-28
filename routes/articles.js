@@ -70,7 +70,7 @@ router.post("/:title/delete", (req, res) => {
   res.redirect("/articles");
 });
 
-//allows clients to delete articles
+//allows clients to delete articles via postman
 router.delete("/", (req, res) => {
   let title = req.body.title;
   DS_Articles.deleteArticle(title);
