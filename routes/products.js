@@ -1,12 +1,21 @@
 var express = require("express");
 var router = express.Router();
 const DS_Products = require("../db/products");
-
+const knex = require("../database");
 //loads products home page
 router.get("/", (req, res) => {
-  let allProducts = DS_Products.getAllProducts();
-  console.log(allProducts);
-  res.render("products", { allProducts });
+  // let allProducts = DS_Products.getAllProducts();
+  // console.log(allProducts);
+  // res.render("products", { allProducts });
+
+  // knex stuff
+  knex
+    .select("*")
+    .from("products_table")
+    .then(products_table => {
+      console.log(products_table);
+      res.render("products", { products_table });
+    });
 });
 
 //renders a page to create new products
