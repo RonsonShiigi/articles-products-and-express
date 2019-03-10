@@ -51,14 +51,26 @@ router.get("/:id", (req, res) => {
 //allows clients to create new products
 router.post("/", (req, res) => {
   let newProduct = req.body;
-  console.log(newProduct);
-  DS_Products.createProduct(
-    newProduct.name,
-    newProduct.price,
-    newProduct.inventory
-  );
+  let newName = newProduct.name;
+  let newPrice = newProduct.price;
+  let newInventory = newProduct.inventory;
+  console.log("new inventory", newInventory);
+  knex("products_table")
+    .insert({
+      name: newName,
+      price: newPrice,
+      inventory: newInventory
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+  // DS_Products.createProduct(
+  //   newProduct.name,
+  //   newProduct.price,
+  //   newProduct.inventory
+  // );
   res.redirect("/products");
-  res.send("you have created a new product");
 });
 
 //allows edits via browser
