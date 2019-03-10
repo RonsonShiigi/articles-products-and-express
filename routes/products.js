@@ -102,14 +102,22 @@ router.post("/", (req, res) => {
 
 //allows edits via browser
 router.post("/:id/edit", (req, res) => {
-  let id = Number(req.params.id);
-  const name = req.body.name;
+  let productId = Number(req.params.id);
+  const nameData = req.body.name;
+  const priceData = req.body.price;
+  const inventoryData = req.body.inventory;
+  knex
+    .select()
+    .from("products_table")
+    .where("id", productId)
+    .update({
+      name: nameData,
+      price: priceData,
+      inventory: inventoryData
+    })
+    .then(res.redirect("/products/" + productId));
 
-  const price = req.body.price;
-  const inventory = req.body.inventory;
-  DS_Products.editProduct(id, name, price, inventory);
-  console.log("newName", name);
-  res.redirect("/products/" + id);
+  // DS_Products.editProduct(id, name, price, inventory);
 });
 
 //allows clients to delete via browser
