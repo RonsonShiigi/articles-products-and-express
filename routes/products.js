@@ -26,26 +26,51 @@ router.get("/new", (req, res) => {
 //renders editing page
 router.get("/:id/edit", (req, res) => {
   const productId = Number(req.params.id);
-  const product = DS_Products.getProductById(productId);
-  console.log("edit");
-  res.render("editProduct", product);
+  console.log("id", productId);
+  knex
+    .select()
+    .from("products_table")
+    .where("id", productId)
+    .then(products_table => {
+      console.log(products_table);
+      let obj = products_table[0];
+      res.render("editProduct", obj);
+    });
+
+  // const product = DS_Products.getProductById(productId);
 });
 
 //renders delete confirmation page
 router.get("/:id/delete", (req, res) => {
   const productId = Number(req.params.id);
-  const product = DS_Products.getProductById(productId);
-  console.log("delete", product);
-  res.render("deleteProducts", product);
+  knex
+    .select()
+    .from("products_table")
+    .where("id", productId)
+    .then(products_table => {
+      let obj = products_table[0];
+      res.render("deleteProducts", obj);
+    });
+
+  // const product = DS_Products.getProductById(productId);
 });
 
 //loads specific products via id number
 router.get("/:id", (req, res) => {
-  let id = Number(req.params.id);
-  console.log("id", id);
-  const product = DS_Products.getProductById(id);
-  console.log("hi", req.params.id);
-  res.render("productSpecs", product);
+  let daid = Number(req.params.id);
+  // console.log("id", daid);
+  knex
+    .select()
+    .from("products_table")
+    .where("id", daid)
+    .then(products_table => {
+      // console.log(products_table);
+      let obj = products_table[0];
+      res.render("productSpecs", obj);
+    });
+  // const product = DS_Products.getProductById(id);
+  // console.log("hi", req.params.id);
+  // res.render("productSpecs", product);
 });
 
 //allows clients to create new products
@@ -61,6 +86,9 @@ router.post("/", (req, res) => {
       price: newPrice,
       inventory: newInventory
     })
+    .then(data => {
+      res.redirect("/products");
+    })
     .catch(err => {
       console.log(err);
     });
@@ -70,7 +98,6 @@ router.post("/", (req, res) => {
   //   newProduct.price,
   //   newProduct.inventory
   // );
-  res.redirect("/products");
 });
 
 //allows edits via browser
@@ -88,8 +115,15 @@ router.post("/:id/edit", (req, res) => {
 //allows clients to delete via browser
 router.post("/:id/delete", (req, res) => {
   const productId = Number(req.params.id);
-  DS_Products.deleteProduct(productId);
-  res.redirect("/products");
+  console.log("hi", req.params);
+  knex
+    .select()
+    .from("products_table")
+    .where("id", productId)
+    .del()
+    .then(res.redirect("/products"));
+
+  // DS_Products.deleteProduct(productId);
 });
 
 //allows clients to delete via postman
