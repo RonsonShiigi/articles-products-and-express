@@ -1,13 +1,19 @@
 var express = require("express");
 var router = express.Router();
 const DS_Articles = require("../db/articles");
-
+const knex = require("../database");
 //middleware that is specific to this router
 
 //loads page for articles
 router.get("/", (req, res) => {
-  const artTitle = DS_Articles.getAllArticles();
-  res.render("articles", { artTitle });
+  // const artTitle = DS_Articles.getAllArticles();
+  knex
+    .select()
+    .from("articles_table")
+    .then(articles_table => {
+      console.log(articles_table);
+      res.render("articles", { articles_table });
+    });
 });
 
 //renders a page for creating a new article
@@ -31,11 +37,17 @@ router.post("/", (req, res) => {
 //loads specific articles
 router.get("/:title", (req, res) => {
   const articleName = req.params.title.replace(/%20/g, "");
-  //   console.log("articleName", articleName);
-
-  const article = DS_Articles.getArticleByTitle(articleName);
+  console.log("articleName", articleName);
+  knex
+    .select()
+    .from("articles_table")
+    .where("title", articleName)
+    .then(articles_table => {
+      let obj = articles_table[0];
+      res.render("articlesSpec", obj);
+    });
+  // const article = DS_Articles.getArticleByTitle(articleName);
   //   console.log("article", article);
-  res.render("articlesSpec", article);
 });
 
 //renders edit articles page
