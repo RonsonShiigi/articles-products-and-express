@@ -84,14 +84,20 @@ router.post("/edit", (req, res) => {
 //renders the delete confimation page
 router.get("/:title/delete", (req, res) => {
   const articleName = req.params.title;
-  const article = DS_Articles.getArticleByTitle(articleName);
-  res.render("deleteArticles", article);
+  knex
+    .select()
+    .from("articles_table")
+    .where("title", articleName)
+    .then(article_table => {
+      let obj = article_table[0];
+      res.render("deleteArticles", obj);
+    });
 });
 
 //allows clients to delete posts via browser
 router.post("/:title/delete", (req, res) => {
   const articleName = req.params.title;
-  DS_Articles.deleteArticle(articleName);
+
   res.redirect("/articles");
 });
 
