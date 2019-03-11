@@ -24,14 +24,21 @@ router.get("/new", (req, res) => {
 //allows clients to post new articles
 router.post("/", (req, res) => {
   let newArt = req.body;
-  DS_Articles.createArticle(
-    newArt.title,
-    newArt.body,
-    newArt.author,
-    newArt.urlTitle
-  );
-  res.redirect("/articles");
-  res.send("good job creating a new article");
+  knex("articles_table")
+    .insert({
+      title: newArt.title,
+      body: newArt.body,
+      author: newArt.author
+    })
+    .then(data => {
+      res.redirect("/articles");
+    });
+  // DS_Articles.createArticle(
+  //   newArt.title,
+  //   newArt.body,
+  //   newArt.author,
+  //   newArt.urlTitle
+  // );
 });
 
 //loads specific articles
