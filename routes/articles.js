@@ -53,8 +53,14 @@ router.get("/:title", (req, res) => {
 //renders edit articles page
 router.get("/:title/edit", (req, res) => {
   const articleName = req.params.title;
-  const article = DS_Articles.getArticleByTitle(articleName);
-  res.render("editArticle", article);
+  knex
+    .select()
+    .from("articles_table")
+    .where("title", articleName)
+    .then(articles_table => {
+      let obj = articles_table[0];
+      res.render("editArticle", obj);
+    });
 });
 
 //alows client to edit article via browser
