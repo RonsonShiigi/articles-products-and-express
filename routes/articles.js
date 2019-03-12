@@ -71,14 +71,23 @@ router.get("/:title/edit", (req, res) => {
 });
 
 //alows client to edit article via browser
-router.post("/edit", (req, res) => {
-  const title = req.body.title;
-  const newTitle = req.body.newTitle;
-  const body = req.body.body;
-  const author = req.body.author;
-  const urlTitle = req.body.urlTitle;
-  DS_Articles.editArticle(title, newTitle, body, author, urlTitle);
-  res.redirect("/articles/" + urlTitle);
+router.post("/:title/edit", (req, res) => {
+  const title = req.params.title;
+  const newTitle = req.body.title;
+  const newBody = req.body.body;
+  const newAuthor = req.body.author;
+  console.log("title", title);
+  console.log("newTitle", newTitle);
+  knex
+    .select()
+    .from("articles_table")
+    .where("title", title)
+    .update({
+      title: newTitle,
+      body: newBody,
+      author: newAuthor
+    })
+    .then(res.redirect("/articles/" + newTitle));
 });
 
 //renders the delete confimation page
@@ -97,8 +106,12 @@ router.get("/:title/delete", (req, res) => {
 //allows clients to delete posts via browser
 router.post("/:title/delete", (req, res) => {
   const articleName = req.params.title;
-
-  res.redirect("/articles");
+  knex
+    .select()
+    .from("articles_table")
+    .where("title", articleName)
+    .del()
+    .then(res.redirect("/articles"));
 });
 
 //allows clients to delete articles via postman

@@ -1,28 +1,22 @@
 <h1>Edit Article</h1>
-<form action="/articles/edit" method="POST">
+<form action="/articles/{{title}}/edit" method="POST">
     <div>
         <h3>Editing: {{title}}</h3>
     </div>
-    <div>
-        <label for="title">Current Title</label>
-        <input type="text" name="title" id="title">
-    </div>
+
     <div>
         <label for="title">New Article Title</label>
-        <input type="text" name="newTitle" id="newTitle">
+        <input type="text" name="title" id="title" placeholder="{{title}}">
     </div>
     <div>
         <label for="body">Body</label>
-        <input type="text" name="body" id="body">
+        <input type="text" name="body" id="body" placeholder="{{body}}">
     </div>
     <div>
         <label for="author">By</label>
-        <input type="text" name="author" id="author">
+        <input type="text" name="author" id="author" placeholder="{{author}}">
     </div>
-    <div>
-        <label for="urlTitle">urlTitle</label>
-        <input type="text" name="urlTitle" id="urlTitle">
-    </div>
+
     <div>
         <button>Finshed Editing</button>
     </div>
